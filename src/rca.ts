@@ -1,7 +1,9 @@
 import storefront from './assets/storefront.json'
 
-export const rcas = Object.values(storefront).flatMap(obj=> Object.values(obj)).flatMap(obj => Object.values(obj))
-export type rca = typeof rcas[0]
+
+export const rcas = Object.values(storefront).flatMap(obj=> Object.values(obj)).flatMap(obj => Object.values(obj)).map(rca => ({unofficial:false, ...rca} as unknown as typeof rca) )
+export type rca = {unofficial: false} & typeof rcas[0]
+
 export const getBodyId = (rca:rca) => rca.accessory_ids.filter(acc => acc.includes('body') && !acc.includes('body_bottom'))[0]?.slice(-11) ?? null
 export const getFaceLowerId = (rca:rca) => rca.accessory_ids.filter(acc => acc.includes('face_lower'))[0]?.slice(-11) ?? null
 export const getEyesId = (rca:rca) => rca.accessory_ids.filter(acc => acc.includes('face_upper'))[0]?.slice(-11) ?? null
