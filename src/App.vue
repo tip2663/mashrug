@@ -5,12 +5,16 @@
     <div class="mashups">
       <div class="dropdown" v-for="(_option, index) in selectedRcas" :key="'dropdown-'+index">
         <label :for="'rca-dropdown-' + index">{{ indexToTrait[index] }}:</label>
-        <select
+        <Multiselect
+          :id="'rca-dropdown-' + index"
           v-model="selectedRcas[index]"
-          :id="'rca-dropdown-' + index">
-          <option :value="null">None</option>
-          <option v-for="rca in sortedRcas" :key="index + '-' + rca.name" :value="rca">{{ rca.name }}</option>
-        </select>
+          :allow-empty="true"
+          :options="dropdownRcas"
+          deselect-label="None"
+          track-by="name"
+          label="name"
+        >
+        </Multiselect>
         </div>
     </div>
     <button @click="downloadCanvas">Download High Resolution</button>
@@ -19,6 +23,7 @@
 </template>
 
 <script setup lang="ts">
+import Multiselect from 'vue-multiselect'
 import { ref, reactive, watch } from 'vue';
 import * as rca from './rca.ts';
 const indexToTrait = [
@@ -34,7 +39,7 @@ const indexToTrait = [
 
 const canvasRef = ref<HTMLCanvasElement | null>(null);
 const selectedRcas = reactive(new Array(8).fill(null)); // No need for ref inside the array
-const sortedRcas = rca.rcas.sort((a, b) => a.name.localeCompare(b.name));
+const dropdownRcas = rca.rcas.sort((a, b) => a.name.localeCompare(b.name))
 
 const downloadCanvas = () => {
   if (canvasRef.value) {
@@ -107,4 +112,5 @@ canvas {
   grid-column: span 2;
   text-align: right;
 }
+
 </style>
