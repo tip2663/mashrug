@@ -29,7 +29,9 @@
       </div>
     </div>
     <button @click="downloadCanvas">Download High Resolution</button>
-    <p>This site is for entertainment purposes only. We are neither affiliated nor endorsed by Reddit.</p>
+    <p>This site is for entertainment purposes only. We are neither affiliated nor endorsed by Reddit.
+    Make sure to only use content of avatars you actually own in order to be compliant with reddit preview terms as per https://redditinc.com/policies/previews-terms
+    </p>
     <p>Older generation avatars do not work because the trickery to fetch the traits doesn't work with them. If you cannot load the images, try turning off advanced tracking protection. All images are fetched off of reddit directly. This site hosts none of reddit's content. Image Copyright is due to the artists. For personal use only. This site has no affiliation to Reddit.</p>
     <p>#stopthedev</p>
   </div>
